@@ -79,6 +79,15 @@ grammar Cro::WebApp::Template::Parser {
         [ '>' || <.malformed: 'variable tag'> ]
     }
 
+    token sigil-tag:sym<component> {
+        '<*'
+        [
+            | '.' <deref>
+            | '$' <identifier> [ '.' <deref> ]?
+        ]?
+        [ '>' || <.malformed: 'component tag'> ]
+    }
+
     token sigil-tag:sym<iteration> {
         :my $*SEPARATOR;
         :my $opener = $¢.clone;
@@ -500,6 +509,8 @@ grammar Cro::WebApp::Template::Parser {
         # { expression. <!DOCTYPE>, <?xml>, and <!--comment--> style things
         # must be considered literal.
         | <[?!]> <[.$>{]>
+        # Adding <*.field> for components
+        | '*' <[.$>]>
     }
 
     token identifier {

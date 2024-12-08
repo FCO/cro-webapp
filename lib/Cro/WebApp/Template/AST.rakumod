@@ -83,6 +83,21 @@ my class VariableAccess does Node is export {
     }
 }
 
+my class ComponentVariableAccess does Node is export {
+    has $.name is required;
+
+    method compile() {
+        qq:to/END/
+        (do \{
+            use Cro::WebApp::Template::Repository;
+            do given { $!name.compile } \{
+                parse-template(.RENDER(), :path("COMPONENT--\{ .^name \}")).renderer.(\$_)
+            \}
+        \})
+        END
+    }
+}
+
 my role Argument does Node is export {
     has Node $.argument;
 }
