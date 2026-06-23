@@ -1,6 +1,6 @@
 Revision history for Cro::WebApp
 
-{{$NEXT}}
+{{NEXT}}
     - Add the 'required' attr to input tags
     - fix constant lazy-list
 
