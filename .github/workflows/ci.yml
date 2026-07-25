@@ -14,10 +14,10 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          - macOS-latest
+#          - macOS-latest
 #          - windows-latest
         raku-version:
-          - "2022.02"
+          - "2024.02"
           - "latest"
     runs-on: ${{ matrix.os }}
     steps:

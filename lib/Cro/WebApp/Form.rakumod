@@ -624,7 +624,7 @@ role Cro::WebApp::Form {
             my $token = $response.request.cookie-value(CSRF-TOKEN-NAME) //
                     $response.cookies.first(*.name eq CSRF-TOKEN-NAME).?value;
             without $token {
-                my constant @CHARS = flat 'A'..'Z', 'a'..'z', '0'..'9';
+                my constant @CHARS = eager flat 'A'..'Z', 'a'..'z', '0'..'9';
                 $token = @CHARS.roll(64).join;
                 try $response.set-cookie(CSRF-TOKEN-NAME, $token, path => '/');
             }
